@@ -7,11 +7,12 @@ import java.time.LocalTime;
 import java.util.Date;
 
 public class RegisterRequest {
+    private String id;
 
     private String lastName;
     private String firstName;
     private String email;
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
     private String adress;
     private int cin;
@@ -96,6 +97,10 @@ public class RegisterRequest {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    public String getId() {
+        return id;
     }
 }
 

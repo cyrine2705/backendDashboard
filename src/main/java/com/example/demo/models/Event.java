@@ -5,16 +5,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Event {
-    private int id;
+    private String id;
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date dateDebut;
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date dateFin;
     private String type;
-
-    public int getId() {
-        return id;
-    }
 
     public Date getDateDebut() {
         return dateDebut;
@@ -28,7 +24,12 @@ public class Event {
         return type;
     }
 
-    public void setId(int id) {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 

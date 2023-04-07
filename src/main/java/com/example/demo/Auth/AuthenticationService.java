@@ -11,9 +11,7 @@ import com.example.demo.models.User;
 import com.example.demo.repositories.EmployeRespository;
 import com.example.demo.repositories.HRRespository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,6 +28,7 @@ public class AuthenticationService {
     private final HRRespository HRrepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
+
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final EmailSender emailSender;
@@ -87,7 +86,12 @@ if( !repository.findByEmail(request.getEmail()).isEmpty()){
 
         if( !HRrepository.findByEmail(request.getEmail()).isEmpty()){
 
-            throw new IllegalArgumentException("User with email " + request.getEmail() + " already exists.");
+         return
+                 AuthenticationResponse
+                         .builder()
+                         .msg(
+                 "User with email " + request.getEmail() + " already exists.").build();
+
         }
         var generatedPasswordHR = generatePassword();
         var user = Employe.builder()
@@ -128,26 +132,24 @@ if( !repository.findByEmail(request.getEmail()).isEmpty()){
                     new UsernamePasswordAuthenticationToken(
                             request.getEmail(),
                             request.getPassword()
-                    ));
-
+                    )
+            );
         } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid email or password");
+            return AuthenticationResponse
+                    .builder()
+                    .msg("Invalid username or password")
+                    .build();
         }
-        var user = repository.findByEmail(request.getEmail())
-                .map(u -> {
-                    try {
-                        var jwtToken = jwtService.generateToken(u);
-                        saveUserToken(u, jwtToken);
-                        return AuthenticationResponse.builder()
-                                .token(jwtToken)
-                                .build();
-                    } catch (AccessDeniedException e) {
-                        throw new AccessDeniedException("Access is denied");
-                    }
-                })
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-
-        return user;
+        var user = repository.findByEmail(request.getEmail()).get();
+        var jwtToken = jwtService.generateToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return AuthenticationResponse
+                .builder()
+                .token(jwtToken)
+                .msg("Logged In")
+                .id(user.getId())
+                .build();
     }
 
 

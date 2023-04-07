@@ -5,17 +5,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Conge {
-    private int id;
+    private String id;
     private String type;
-    @JsonFormat(pattern="dd/MM/yyyy")
-    private Date datedebut;
-    @JsonFormat(pattern="dd/MM/yyyy")
-    private Date datefin;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date startDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date endDate;
     private String description;
-    private String preuve;
-    private String etat;
+    private String proof;
+    private String state;
+    private String idEmploye;
 
-    public int getId() {
+    public String getIdEmploye() {
+        return idEmploye;
+    }
+
+    public void setIdEmploye(String idEmploye) {
+        this.idEmploye = idEmploye;
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -23,27 +32,14 @@ public class Conge {
         return type;
     }
 
-    public Date getDatedebut() {
-        return datedebut;
-    }
 
-    public Date getDatefin() {
-        return datefin;
-    }
 
     public String getDescription() {
         return description;
     }
 
-    public String getPreuve() {
-        return preuve;
-    }
 
-    public String getEtat() {
-        return etat;
-    }
-
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,23 +47,39 @@ public class Conge {
         this.type = type;
     }
 
-    public void setDatedebut(Date datedebut) {
-        this.datedebut = datedebut;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDatefin(Date datefin) {
-        this.datefin = datefin;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getProof() {
+        return proof;
+    }
+
+    public void setProof(String proof) {
+        this.proof = proof;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
+    }}
 
-    public void setPreuve(String preuve) {
-        this.preuve = preuve;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
-}

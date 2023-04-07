@@ -6,7 +6,7 @@ import com.example.demo.services.HRService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/HRs")
@@ -16,7 +16,7 @@ public class HRController {
 
 
     @GetMapping
-    public Optional<User> getHrs() {
+    public List<User> getHrs() {
         return HRService.getAllEmployees();
     }
 

@@ -1,49 +1,46 @@
 package com.example.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
-
 public class Reclamation {
-    private Integer id;
+    private String id;
 
-    private String sujet;
+    private String topic;
     private String description;
-    private Integer idEmploye;
+    private String idEmploye;
 
     public String getDescription() {
         return description;
     }
 
-    public String getSujet() {
-        return sujet;
+
+
+    public String getId() {
+        return id;
     }
 
-    public Integer getIdEmploye() {
-        return idEmploye;
-    }
-
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
+    public String getIdEmploye() {
+        return idEmploye;
+    }
 
-
-    public void setIdEmploye(Integer idEmploye) {
+    public void setIdEmploye(String idEmploye) {
         this.idEmploye = idEmploye;
     }
 
-    public void setSujet(String sujet) {
-        this.sujet = sujet;
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
 
 }

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class HRService {
@@ -17,7 +17,7 @@ public class HRService {
     private HRRespository HRRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public Optional<User> getAllEmployees(){
+    public List<User> getAllEmployees(){
         return   HRRepository.findByRole(Role.RH);
     }
 

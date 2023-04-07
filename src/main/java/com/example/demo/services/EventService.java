@@ -27,7 +27,8 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public  Event getEvent(int eventId) {
+
+    public  Event getEvent(String eventId) {
         return eventRepository.findById(eventId).get();
     }
     public Event  updateEvent(Event event) {
@@ -38,7 +39,7 @@ public class EventService {
         updatedEvent.setType(event.getType());
         return eventRepository.save(updatedEvent);}
 
-    public String deleteEvent(int eventId) {
+    public String deleteEvent(String eventId) {
         eventRepository.deleteById(eventId);
         return "deleted from dashboard";
     }

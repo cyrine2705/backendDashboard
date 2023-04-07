@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class EmployeService {
@@ -18,31 +18,27 @@ public class EmployeService {
     private PasswordEncoder passwordEncoder;
 
 
-    public Optional<User> getAllEmployees(){
-        return employeRepository.findByRole(Role.EMPLOYE);
+    public List<User> getAllEmployees(){
+        return  employeRepository.findByRole(Role.EMPLOYE);
     }
 
-    public Employe getEmploye(String employeId) {
-        return (Employe) employeRepository.findById(employeId).get();
+    public User getEmploye(String id) {
+       return employeRepository.findById(id).get();
+
     }
-    public Employe updateEmploye(Employe employe) {
-        Employe updatedUser = (Employe) employeRepository.findById(employe.getId()).get();
+    public User updateEmploye(String id, Employe employe) {
+        User updatedUser = employeRepository.findById(id).get();
         updatedUser.setLastName(employe.getLastName());
         updatedUser.setFirstName(employe.getFirstName());
-        updatedUser.setEmail(employe.getEmail());
         updatedUser.setBirthDate(employe.getBirthDate());
         updatedUser.setAdress(employe.getAdress());
-        updatedUser.setCin(employe.getCin());
         updatedUser.setPhoneNumber1(employe.getPhoneNumber1());
         updatedUser.setPhoneNumber2(employe.getPhoneNumber2());
         updatedUser.setImage(employe.getImage());
-        updatedUser.setNbConge(employe.getNbConge());
         updatedUser.setSituation(employe.getSituation());
         updatedUser.setSexe(employe.getSexe());
         updatedUser.setNbEnfants(employe.getNbEnfants());
-        updatedUser.setStartTime(employe.getStartTime());
-        updatedUser.setEndTime(employe.getEndTime());
-        return (Employe) employeRepository.save(updatedUser);
+        return employeRepository.save(updatedUser);
     }
 
     public String deleteEmploye( String employeId) {
@@ -50,10 +46,13 @@ public class EmployeService {
         return "deleted from dashboard";
     }
 
-    public Employe changePassword(String email, String currentPassword, String newPassword) throws Exception {
-        Employe user =(Employe) employeRepository.findByEmail(email).get();
+    public User changePassword(String id, String currentPassword, String newPassword) throws Exception {
+     User  user= employeRepository.findById(id).get();
 
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            System.out.println(currentPassword);
+            System.out.println(newPassword);
+            System.out.println(user.getPassword());
             throw new Exception("Invalid current password");
         }
 

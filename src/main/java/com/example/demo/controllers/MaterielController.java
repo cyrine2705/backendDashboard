@@ -1,22 +1,15 @@
 package com.example.demo.controllers;
-import java.util.List;
-
 
 import com.example.demo.models.Materiel;
 import com.example.demo.services.MaterielService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/materiel")
+@RequestMapping("/material")
 public class MaterielController {
     @Autowired
     private MaterielService materielService;
@@ -30,6 +23,10 @@ public class MaterielController {
     @GetMapping
     public List<Materiel> getmateriel(){
         return materielService.getAllMateriel();
+    }
+    @GetMapping("/employe/{employeId}")
+    public List<Materiel> getCongebyEmploye(@PathVariable String employeId) {
+        return materielService.getMaterialByEmployeId(employeId);
     }
 
     @GetMapping("/{materielId}")

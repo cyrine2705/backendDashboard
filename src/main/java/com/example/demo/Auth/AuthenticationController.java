@@ -25,10 +25,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.registerHR(request));
     }
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    public AuthenticationResponse authenticate(
             @RequestBody AuthenticationRequest request
-    ) throws Throwable {
-        return ResponseEntity.ok(service.authenticate(request));
+    ) {
+        return service.authenticate(request);
     }
 
     @PostMapping("/reset-password")

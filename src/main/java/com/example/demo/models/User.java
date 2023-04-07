@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Date;
@@ -23,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class User implements UserDetails, Serializable {
+public class User implements UserDetails {
 
 @Id
 private String id;
@@ -31,7 +30,7 @@ private String id;
 private String lastName;
 private String firstName;
 private String email;
-@JsonFormat(pattern="dd/MM/yyyy")
+@JsonFormat(pattern="yyyy-MM-dd")
 private Date birthDate;
 private String adress;
 private int cin;

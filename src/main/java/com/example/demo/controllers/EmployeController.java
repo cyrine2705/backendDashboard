@@ -6,7 +6,7 @@ import com.example.demo.services.EmployeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employes")
@@ -17,23 +17,23 @@ public class EmployeController {
 
 
         @GetMapping
-        public Optional<User> getEmployes() {
+        public List<User> getEmployes() {
             return employeService.getAllEmployees();
         }
 
-        @GetMapping("/{employeId}")
-        public Employe getEmploye(@PathVariable String employeId) {
-            return employeService.getEmploye(employeId);
+        @GetMapping("/{id}")
+        public User getEmploye(@PathVariable String id) {
+            return employeService.getEmploye(id);
         }
 
-        @PutMapping
-        public Employe ModifyEmploye(@RequestBody Employe employe) {
-            return employeService.updateEmploye(employe);
+        @PutMapping("/{employeId}")
+        public User ModifyEmploye(@PathVariable String employeId,@RequestBody Employe employe) {
+            return employeService.updateEmploye(employeId,employe);
         }
 
-    @PutMapping("/changePassword")
-    public Employe changePassword(@RequestBody String email, String currentPassword, String newPassword) throws Exception {
-        return employeService.changePassword(email,currentPassword,newPassword);    }
+    @PutMapping("/changePassword/{employeId}")
+    public User changePassword(@PathVariable String employeId,@RequestParam String currentPassword,@RequestParam String newPassword) throws Exception {
+        return employeService.changePassword(employeId ,currentPassword,newPassword);    }
 
         @DeleteMapping("/{employeId}")
         public String deleteEmploye(@PathVariable String employeId) {

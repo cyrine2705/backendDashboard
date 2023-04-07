@@ -21,13 +21,16 @@ public class CongeService {
     public List<Conge> getAllConge(){
         return CongeRepository.findAll();
     }
+    public List<Conge> getCongeByEmployeId(String employeId){
+        return CongeRepository.findByIdEmploye(employeId);
+    }
 
-    public Conge getConge(int congeId) {
+    public Conge getConge(String congeId) {
         return CongeRepository.findById(congeId).get();
     }
 
 
-    public String deleteconge(int congeId) {
+    public String deleteconge(String congeId) {
         CongeRepository.deleteById(congeId);
         return "deleted from dashboard";
     }

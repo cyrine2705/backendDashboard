@@ -27,19 +27,18 @@ public class ReclamationService {
         return reclamationRepository.findAll();
     }
 
-    public Reclamation getreclamation(int reclamationId) {
+    public Reclamation getreclamation(String reclamationId) {
         return reclamationRepository.findById(reclamationId).get();
     }
     public Reclamation  updatereclamation(Reclamation reclamation) {
         Reclamation updatedReclamation = reclamationRepository.findById(reclamation.getId()).get();
-        updatedReclamation.setId(reclamation.getId());
-        updatedReclamation.setSujet(reclamation.getSujet());
+        updatedReclamation.setTopic(reclamation.getTopic());
         updatedReclamation.setDescription(reclamation.getDescription());
         updatedReclamation.setIdEmploye(reclamation.getIdEmploye());
         return  reclamationRepository.save(updatedReclamation);
     }
 
-    public String deleteReclamation(int reclamationId) {
+    public String deleteReclamation(String reclamationId) {
         reclamationRepository.deleteById(reclamationId);
         return "deleted from dashboard";
     }

@@ -5,15 +5,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Materiel {
-    private int id;
+    private String id;
     private String type;
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
-    private String description;
-    private int quantite;
-    private String etat;
 
-    public void setId(int id) {
+
+    private String description;
+    private int quantity;
+    private String state;
+    private String idEmploye;
+
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,15 +32,9 @@ public class Materiel {
         this.description = description;
     }
 
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
 
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -53,11 +50,27 @@ public class Materiel {
         return description;
     }
 
-    public int getQuantite() {
-        return quantite;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public String getEtat() {
-        return etat;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getIdEmploye() {
+        return idEmploye;
+    }
+
+    public void setIdEmploye(String idEmploye) {
+        this.idEmploye = idEmploye;
     }
 }

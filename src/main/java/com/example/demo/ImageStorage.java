@@ -12,12 +12,12 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/image")
+@RequestMapping("/file")
 public class ImageStorage {
 	@Autowired
 	private FirebaseImage firebase;
 	
-	@PostMapping("/UploadImage")
+	@PostMapping("/UploadFile")
 	public   String GetImage(@RequestParam(value = "file") MultipartFile multipartFile){
 		return firebase.GetImage(multipartFile);
 	}

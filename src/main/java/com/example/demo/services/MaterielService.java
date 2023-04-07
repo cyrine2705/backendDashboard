@@ -25,6 +25,9 @@ public class MaterielService {
     public List<Materiel> getAllMateriel(){
         return MaterielRepository.findAll();
     }
+    public List<Materiel> getMaterialByEmployeId(String employeId){
+        return MaterielRepository.findByIdEmploye(employeId);
+    }
 
     public Materiel getMateriel(int materielId) {
         return MaterielRepository.findById(materielId).get();
