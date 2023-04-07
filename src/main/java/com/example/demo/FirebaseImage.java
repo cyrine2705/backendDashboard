@@ -23,7 +23,7 @@ public class FirebaseImage  {
 public String uploadFile(File file, String fileName) throws IOException {
     BlobId blobId = BlobId.of("projet-pfe-3850d.appspot.com", fileName);
     BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
-    Credentials credentials = GoogleCredentials.fromStream(Files.newInputStream(Paths.get("C:/Users/DELL/OneDrive/Bureau/spring/pfe/BackendRH/credentials.json")));
+    Credentials credentials = GoogleCredentials.fromStream(Files.newInputStream(Paths.get("credentials.json")));
     com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
     storage.create(blobInfo, Files.readAllBytes(file.toPath()));
     return String.format("https://firebasestorage.googleapis.com/v0/b/projet-pfe-3850d.appspot.com/o/%s?alt=media", URLEncoder.encode(fileName, String.valueOf(StandardCharsets.UTF_8)));
