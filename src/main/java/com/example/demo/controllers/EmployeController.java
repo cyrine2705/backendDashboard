@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/employes")
 public class EmployeController {
@@ -30,6 +31,10 @@ public class EmployeController {
         public User ModifyEmploye(@PathVariable String employeId,@RequestBody Employe employe) {
             return employeService.updateEmploye(employeId,employe);
         }
+    @PutMapping("update/{employeId}")
+    public User ModifyEmployeFromRH(@PathVariable String employeId,@RequestBody Employe employe) {
+        return employeService.updateEmployeFromDashboard(employeId,employe);
+    }
 
     @PutMapping("/changePassword/{employeId}")
     public User changePassword(@PathVariable String employeId,@RequestParam String currentPassword,@RequestParam String newPassword) throws Exception {

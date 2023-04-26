@@ -6,19 +6,34 @@ import java.util.Date;
 
 public class Event {
     private String id;
-    @JsonFormat(pattern="dd/MM/yyyy")
-    private Date dateDebut;
-    @JsonFormat(pattern="dd/MM/yyyy")
-    private Date dateFin;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    private Date from;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    private Date to;
     private String type;
+    private String description;
+    private String title;
 
-    public Date getDateDebut() {
-        return dateDebut;
+
+    public String getDescription() {
+        return description;
     }
 
-    public Date getDateFin() {
-        return dateFin;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+
+
 
     public String getType() {
         return type;
@@ -33,12 +48,20 @@ public class Event {
         this.id = id;
     }
 
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
+    public Date getFrom() {
+        return from;
     }
 
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
+    public void setFrom(Date from) {
+        this.from = from;
+    }
+
+    public Date getTo() {
+        return to;
+    }
+
+    public void setTo(Date to) {
+        this.to = to;
     }
 
     public void setType(String type) {

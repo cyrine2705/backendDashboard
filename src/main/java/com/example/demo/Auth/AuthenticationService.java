@@ -49,8 +49,14 @@ public class AuthenticationService {
 
 if( !repository.findByEmail(request.getEmail()).isEmpty()){
 
-    throw new IllegalArgumentException("User with email " + request.getEmail() + " already exists.");
+    return
+            AuthenticationResponse
+                    .builder()
+                    .msg(
+                            "User with email " + request.getEmail() + " already exists.").build();
+
 }
+
         var generatedPassword = generatePassword();
         var user = Employe.builder()
                 .firstName(request.getFirstName())
@@ -193,6 +199,7 @@ if( !repository.findByEmail(request.getEmail()).isEmpty()){
         emailSender.sendResetPasswordEmail(email, resetPasswordLink);
     }
     public void resetPasswordWithToken(String token, String newPassword) throws Exception {
+        System.out.println(token);
         User user = repository.findByResetToken(token);
         System.out.println("thiiiiiiiis"+user);
 

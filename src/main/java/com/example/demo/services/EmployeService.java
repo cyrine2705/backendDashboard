@@ -18,6 +18,7 @@ public class EmployeService {
     private PasswordEncoder passwordEncoder;
 
 
+
     public List<User> getAllEmployees(){
         return  employeRepository.findByRole(Role.EMPLOYE);
     }
@@ -41,6 +42,20 @@ public class EmployeService {
         return employeRepository.save(updatedUser);
     }
 
+    public User updateEmployeFromDashboard(String id, Employe employe) {
+        User updatedUser = employeRepository.findById(id).get();
+        updatedUser.setLastName(employe.getLastName());
+        updatedUser.setFirstName(employe.getFirstName());
+        updatedUser.setBirthDate(employe.getBirthDate());
+        updatedUser.setRole(employe.getRole());
+        updatedUser.setAdress(employe.getAdress());
+        updatedUser.setPhoneNumber1(employe.getPhoneNumber1());
+        updatedUser.setPhoneNumber2(employe.getPhoneNumber2());
+        updatedUser.setSituation(employe.getSituation());
+        updatedUser.setSexe(employe.getSexe());
+        updatedUser.setNbEnfants(employe.getNbEnfants());
+        return employeRepository.save(updatedUser);
+    }
     public String deleteEmploye( String employeId) {
         employeRepository.deleteById(employeId);
         return "deleted from dashboard";

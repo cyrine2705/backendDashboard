@@ -34,8 +34,10 @@ public class EventService {
     public Event  updateEvent(Event event) {
         Event updatedEvent = eventRepository.findById(event.getId()).get();
         updatedEvent.setId(event.getId());
-        updatedEvent.setDateDebut(event.getDateDebut());
-        updatedEvent.setDateFin(event.getDateFin());
+        updatedEvent.setTitle(event.getTitle());
+        updatedEvent.setDescription(event.getDescription());
+        updatedEvent.setFrom(event.getFrom());
+        updatedEvent.setTo(event.getTo());
         updatedEvent.setType(event.getType());
         return eventRepository.save(updatedEvent);}
 

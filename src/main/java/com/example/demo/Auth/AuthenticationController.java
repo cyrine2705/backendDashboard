@@ -31,15 +31,15 @@ public class AuthenticationController {
         return service.authenticate(request);
     }
 
-    @PostMapping("/reset-password")
+    @PostMapping("/request-password")
     public ResponseEntity<?> resetPassword(@RequestBody RegisterRequest request) throws Exception {
         service.resetPassword(request.getEmail());
         return ResponseEntity.ok().build();
     }
 
 
-    @PostMapping("/reset-password/{token}")
-    public ResponseEntity<?> resetPasswordWithToken(@PathVariable String token, @RequestBody  RegisterRequest request) throws Exception {
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPasswordWithToken(@RequestParam String token, @RequestBody  RegisterRequest request) throws Exception {
        service.resetPasswordWithToken(token, request.getPassword());
         return ResponseEntity.ok().build();
     }
