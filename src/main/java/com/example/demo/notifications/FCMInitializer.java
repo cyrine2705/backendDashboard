@@ -19,7 +19,7 @@ public class FCMInitializer {
     public void initialize() {
         try {
             FileInputStream serviceAccount =
-                    new FileInputStream("C:/Users/DELL/OneDrive/Bureau/spring/pfe/BackendRH/credentials.json");
+                    new FileInputStream("credentials.json");
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
