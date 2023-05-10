@@ -14,6 +14,7 @@ public class AuthenticationResponse {
 
     private String token;
     private String msg;
+    private String device;
 
 
 }

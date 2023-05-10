@@ -31,6 +31,10 @@ public class EmployeController {
         public User ModifyEmploye(@PathVariable String employeId,@RequestBody Employe employe) {
             return employeService.updateEmploye(employeId,employe);
         }
+    @PutMapping("/device")
+    public String saveDevice(@PathVariable String employeId,@RequestBody String token) {
+        return employeService.saveDeviceToken(token, employeId);
+    }
     @PutMapping("update/{employeId}")
     public User ModifyEmployeFromRH(@PathVariable String employeId,@RequestBody Employe employe) {
         return employeService.updateEmployeFromDashboard(employeId,employe);

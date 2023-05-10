@@ -41,6 +41,13 @@ public class EmployeService {
          return employeRepository.findByCin(cin).get().getFirstName();
 
     }
+    public String saveDeviceToken(String deviceToken,String empId){
+        User u =employeRepository.findById(empId).get();
+        u.setDeviceToken(deviceToken);
+        employeRepository.save(u);
+        return "saved";
+
+    }
     public String presence(int cin,String temps){
 
         User u = employeRepository.findByCin(cin).get();
