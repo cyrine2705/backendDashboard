@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Date;
@@ -44,11 +45,26 @@ private Role role;
 private String situation;
 private String sexe;
 private int nbEnfants;
+private boolean present;
+
+	public boolean isPresent() {
+		return present;
+	}
+
+	public void setPresent(boolean present) {
+		this.present = present;
+	}
+
 	@JsonFormat(pattern = "HH:mm:ss")
 	private LocalTime startTime;
 	@JsonFormat(pattern = "HH:mm:ss")
 	private LocalTime endTime;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime entryTime;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime exitingTime;
 	private String resetToken;
+	private String deviceToken;
 	private Date resetTokenExpiration;
 
 
@@ -150,6 +166,31 @@ public void setNbEnfants(int nbEnfants) {
 	this.nbEnfants = nbEnfants;
 }
 
+
+	public LocalDateTime getEntryTime() {
+		return entryTime;
+	}
+
+	public void setEntryTime(LocalDateTime entryTime) {
+		this.entryTime = entryTime;
+	}
+
+	public LocalDateTime getExitingTime() {
+		return exitingTime;
+	}
+
+	public void setExitingTime(LocalDateTime exitingTime) {
+		this.exitingTime = exitingTime;
+	}
+
+	public String getDeviceToken() {
+		return deviceToken;
+	}
+
+	public void setDeviceToken(String deviceToken) {
+		this.deviceToken = deviceToken;
+	}
+
 	public String getResetToken() {
 		return resetToken;
 	}
@@ -235,5 +276,35 @@ public void setNbEnfants(int nbEnfants) {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id='" + id + '\'' +
+				", lastName='" + lastName + '\'' +
+				", firstName='" + firstName + '\'' +
+				", email='" + email + '\'' +
+				", birthDate=" + birthDate +
+				", adress='" + adress + '\'' +
+				", cin=" + cin +
+				", phoneNumber1=" + phoneNumber1 +
+				", phoneNumber2=" + phoneNumber2 +
+				", image='" + image + '\'' +
+				", password='" + password + '\'' +
+				", nbConge=" + nbConge +
+				", role=" + role +
+				", situation='" + situation + '\'' +
+				", sexe='" + sexe + '\'' +
+				", nbEnfants=" + nbEnfants +
+				", present=" + present +
+				", startTime=" + startTime +
+				", endTime=" + endTime +
+				", entryTime='" + entryTime + '\'' +
+				", exitingTime='" + exitingTime + '\'' +
+				", resetToken='" + resetToken + '\'' +
+				", deviceToken='" + deviceToken + '\'' +
+				", resetTokenExpiration=" + resetTokenExpiration +
+				'}';
 	}
 }

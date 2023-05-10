@@ -157,6 +157,34 @@ if( !repository.findByEmail(request.getEmail()).isEmpty()){
                 .id(user.getId())
                 .build();
     }
+    public AuthenticationResponse authenticateEmploye(AuthenticationRequest request) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        } catch (AuthenticationException e) {
+            return AuthenticationResponse
+                    .builder()
+                    .msg("Invalid username or password")
+                    .build();
+        }
+        var user = repository.findByEmail(request.getEmail()).get();
+        var jwtToken = jwtService.generateToken(user);
+        user.setDeviceToken(request.getDeviceToken());
+        repository.save(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return AuthenticationResponse
+                .builder()
+                .token(jwtToken)
+                .msg("Logged In")
+                .id(user.getId())
+                .build();
+    }
+
 
 
 

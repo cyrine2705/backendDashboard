@@ -1,19 +1,28 @@
 package com.example.demo.services;
 
 import com.example.demo.models.Employe;
+import com.example.demo.models.Pointage;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import com.example.demo.repositories.EmployeRespository;
+import com.example.demo.repositories.PointageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class EmployeService {
     @Autowired
     private EmployeRespository employeRepository;
+    @Autowired
+    private PointageRepository pointageRespository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -25,6 +34,37 @@ public class EmployeService {
 
     public User getEmploye(String id) {
        return employeRepository.findById(id).get();
+
+    }
+    public String getEmployeByCin(int cin) {
+
+         return employeRepository.findByCin(cin).get().getFirstName();
+
+    }
+    public String presence(int cin,String temps){
+
+        User u = employeRepository.findByCin(cin).get();
+        System.out.println(u.isPresent());
+        if (!u.isPresent()){
+            u.setPresent(true);
+            u.setEntryTime(LocalDateTime.parse(temps));
+            employeRepository.save(u);
+            return u.toString();
+        }
+        else{
+            u.setExitingTime(LocalDateTime.parse(temps));
+            employeRepository.save(u);
+            pointageRespository.save(new Pointage(LocalDate.now(),u.getId(), u.getEntryTime(),u.getExitingTime()));
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+            scheduler.schedule(() -> {
+                u.setEntryTime(null);
+                u.setExitingTime(null);
+                u.setPresent(false);
+                employeRepository.save(u);
+            }, 5, TimeUnit.MINUTES);
+
+            return "ended"+u.getExitingTime();
+        }
 
     }
     public User updateEmploye(String id, Employe employe) {

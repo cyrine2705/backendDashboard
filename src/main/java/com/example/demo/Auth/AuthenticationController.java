@@ -30,6 +30,12 @@ public class AuthenticationController {
     ) {
         return service.authenticate(request);
     }
+    @PostMapping("/authenticateEmploye")
+    public AuthenticationResponse authenticateEmploye(
+            @RequestBody AuthenticationRequest request
+    ) {
+        return service.authenticate(request);
+    }
 
     @PostMapping("/request-password")
     public ResponseEntity<?> resetPassword(@RequestBody RegisterRequest request) throws Exception {
