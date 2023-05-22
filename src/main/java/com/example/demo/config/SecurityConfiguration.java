@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/pointage/**")
                 .permitAll()
-                .antMatchers("/notification/token")
+                .antMatchers("/notifications/**")
                 .permitAll()
                 .antMatchers("/auth/**")
                 .permitAll()

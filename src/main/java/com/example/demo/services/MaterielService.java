@@ -11,10 +11,6 @@ public class MaterielService {
     @Autowired
     private MaterielRepository MaterielRepository;
 
-
-
-
-
     public Materiel addMateriel(Materiel materiel) {
 
         return MaterielRepository.save(materiel);
@@ -29,12 +25,17 @@ public class MaterielService {
         return MaterielRepository.findByIdEmploye(employeId);
     }
 
-    public Materiel getMateriel(int materielId) {
+    public Materiel getMateriel(String materielId) {
         return MaterielRepository.findById(materielId).get();
     }
 
+    public Materiel changeState (String materialId ,String state){
+        Materiel m =MaterielRepository.findById(materialId).get();
+        m.setState(state);
+        return MaterielRepository.save(m);
+    }
 
-    public String deletemateriel(int materielId) {
+    public String deletemateriel(String materielId) {
         MaterielRepository.deleteById(materielId);
         return "deleted from dashboard";
     }

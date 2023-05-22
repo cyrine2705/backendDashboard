@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/material")
@@ -25,16 +26,19 @@ public class MaterielController {
         return materielService.getAllMateriel();
     }
     @GetMapping("/employe/{employeId}")
-    public List<Materiel> getCongebyEmploye(@PathVariable String employeId) {
+    public List<Materiel> getMaterialbyEmploye(@PathVariable String employeId) {
         return materielService.getMaterialByEmployeId(employeId);
     }
-
+    @PostMapping("/{materialId}")
+    public Materiel changeMaterialState(@PathVariable String materialId, @RequestBody String etat) {
+        return materielService.changeState(materialId, etat);
+    }
     @GetMapping("/{materielId}")
-    public Materiel getmateriel(@PathVariable int materielId) {
+    public Materiel getmateriel(@PathVariable String materielId) {
         return materielService.getMateriel(materielId);
     }
     @DeleteMapping("/{materielId}")
-    public String deletemateriel(@PathVariable int materielId) {
+    public String deletemateriel(@PathVariable String materielId) {
         return materielService.deletemateriel(materielId);
     }
 

@@ -20,4 +20,8 @@ public class PointageController {
     public String NameEmploye(@PathVariable int cin) {
         return employeService.getEmployeByCin(cin);
     }
+    @GetMapping("/posture/{cin}")
+    public String DeviceEmploye(@PathVariable int cin) {
+        return employeService.getDeviceToken(cin);
+    }
 }
