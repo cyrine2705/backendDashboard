@@ -17,9 +17,7 @@ public class PushNotificationController {
     @Autowired
     private PushNotificationService pushNotificationService;
 
-    public PushNotificationController(PushNotificationService pushNotificationService) {
-        this.pushNotificationService = pushNotificationService;
-    }
+
 
     @PostMapping("/token")
     public ResponseEntity sendTokenNotification(@RequestBody PushNotificationRequest request) {
