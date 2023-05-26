@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class PushNotificationService {
 @Autowired
-
 private NotificationRepository notif;
     private Logger logger = LoggerFactory.getLogger(PushNotificationService.class);
 
@@ -31,7 +30,7 @@ private NotificationRepository notif;
         }
     }
     public List<PushNotificationRequest> getNotifications(String device){
-    return notif.findByToken(device);
+          return notif.findByToken(device);
 
     }
 
